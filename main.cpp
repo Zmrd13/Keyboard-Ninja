@@ -4,6 +4,8 @@
 const int size = 100;
 long int time_lev;
 int points;
+
+int flag = 1;
 using namespace std;
 string current_array[size];
 string first_lev[size], second_lev[size], third_lev[size], fourth_lev[size],
@@ -14,8 +16,10 @@ void array_writer(string *lev) {
   }
 }
 void level_changer() {
+
   int key;
   cin >> key;
+
   switch (key) {
   case 1:
     array_writer(first_lev);
@@ -51,7 +55,6 @@ void read(const string &path, string *lev) {
     lev[i] = str;
     i++;
   }
-
 }
 
 void menu1() {
@@ -112,10 +115,10 @@ void menu2() {
          "|                   | из этого следует ,что минимальный балл это 0. "
          "                |\n"
          "|                   | Уровень будет считаться проиденным если балл "
-         "за прохождение   |\n"
-         "|                   | больше уровня  в 3 раза (Уровень *3).          "
-         "                |\n"
-         "|                   | Читкоды-(Devlog,RandOff).                     "
+          "за прохождение   |\n"
+          "|                   | больше 100 раза .         "
+          "                |\n"
+          "|                   | Читкоды-(Devlog,RandOff).                     "
          "                |\n"
          "|                   |                                               "
          "                |\n"
@@ -150,24 +153,24 @@ void time_choose() {
   cout << "Выбери свое время в секундах";
   cin >> key;
   time_lev = key;
+  cout << "Начали \n Пиши слово : ";
 }
 
 int wr_check(const string &right) {
   string in;
   int tr = 0;
-  while ((in != right) && (tr < 4)) {
+  while ((in != right)) {
 
     cin >> in;
     if (in == right) {
       cout << "\nВерно" << endl;
       return 1;
-    } else {
+    }
+    if (in != right) {
       cout << "Не верно,заново пиши";
-      tr++;
     }
   }
-  cout << "\nСлишком много попыток";
-  return 3;
+  return 0;
 }
 int timer_check(long int start) {
   time_t timer1 = time(NULL);
@@ -182,32 +185,43 @@ int timer_check(long int start) {
 }
 
 int task() {
+
   time_t start = time(NULL);
   // cout << start << endl;
-  string word = current_array[rand() % 100 - start % 100];
+  string word = current_array[start % 100];
 
-  cout << "Начали \n Пиши слово : " << word << endl;
+  cout << "Пиши слово : " << word << endl;
 
   if (wr_check(word) != 3) {
     timer_check(start);
-    if (timer_check(start) != 0) {
+    if (timer_check(start) > 0) {
       cout << "Молодец" << endl;
       points += timer_check(start);
       cout << points;
       return 1;
     }
-    if (wr_check(word) == 3) {
-      cout << "\nПридется заново тебе все делать ";
-    }
+    flag = 0;
 
   } else
-    cout << "\nЭх , но не успел\nПридется заново тебе все делать ";
-  return 0;
+
+    return 0;
+}
+void game() {
+
+  while (points <= 100) {
+    cout << "Выбор уровня 1 - 5";
+    level_changer();
+    time_choose();
+    flag = 1;
+    while ((flag != 0) && (points <= 100)) {
+
+      task();
+    }
+  }
 }
 
 int main() {
 
-  system("CLS");
 
   read("1s.txt", first_lev);
   read("2s.txt", second_lev);
@@ -216,9 +230,6 @@ int main() {
   read("5s.txt", fifth_lev);
   menu1();
   menu2();
-  level_changer();
-  time_choose();
-  task();
-
+  game();
   // array_test();
 }
