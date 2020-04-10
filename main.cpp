@@ -131,8 +131,7 @@ void menu2() {
   cin >> key;
   switch (key) {
   case 1:
-    cout << "Выберем сложность!(введите два раза тот же уровень чтобы "
-            "подтвердить,считывается последний ваш вариант)\n";
+ 
     level_changer();
     break;
   case 2:
@@ -242,7 +241,7 @@ void game() {
   level[4] = false;
   char key = 'i';
   while (key != 'n') {
-    while (points <= 100) {
+    while (points <= 400) {
       cout << "Выбор уровня 1 - 5";
       level_changer();
 
