@@ -51,12 +51,7 @@ void read(const string &path, string *lev) {
     lev[i] = str;
     i++;
   }
-  cout << endl;
-  cout << "done";
-  cout << endl;
 
-  cout << endl;
-  cout << "2-done" << endl;
 }
 
 void menu1() {
@@ -164,14 +159,14 @@ int wr_check(const string &right) {
 
     cin >> in;
     if (in == right) {
-      cout << "Верно" << endl;
+      cout << "\nВерно" << endl;
       return 1;
     } else {
       cout << "Не верно,заново пиши";
       tr++;
     }
   }
-  cout << "Слишком много попыток";
+  cout << "\nСлишком много попыток";
   return 3;
 }
 int timer_check(long int start) {
@@ -206,7 +201,7 @@ int task() {
     }
 
   } else
-    cout << "Эх , но не успел\nПридется заново тебе все делать ";
+    cout << "\nЭх , но не успел\nПридется заново тебе все делать ";
   return 0;
 }
 
