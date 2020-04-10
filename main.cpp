@@ -159,7 +159,7 @@ void time_choose() {
 
 int wr_check(const string &right) {
   string in;
-  int tr = 0;
+
   while ((in != right)) {
 
     cin >> in;
@@ -204,8 +204,9 @@ int task() {
     flag = 0;
 
   } else
+    ;
 
-    return 0;
+  return 0;
 }
 void level_menu() {
   cout << "+---------------------------------------------------------+\n"
