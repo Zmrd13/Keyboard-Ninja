@@ -1,6 +1,9 @@
+#include <ctime>
 #include <fstream>
 #include <iostream>
 const int size = 100;
+long int time_lev;
+int points;
 using namespace std;
 string current_array[size];
 string first_lev[size], second_lev[size], third_lev[size], fourth_lev[size],
@@ -90,40 +93,41 @@ void menu1() {
 }
 void menu2() {
   int key;
-  cout << "\n"
-          "\n"
-          "\n"
-          "\n"
-          "+-------------------------------------------------------------------"
-          "----------------+\n"
-          "|   Keyboard        "
-          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-          "|           Ninja   "
-          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-          "|                   "
-          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-          "|                   "
-          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-          "+-------------------------------------------------------------------"
-          "----------------+\n"
-          "|                   | Ваша задача : написать слово до того как "
-          "выйдет время.        |\n"
-          "|                   | Каждая оставшаяся секунда записывается в доп "
-          "баллы,           |\n"
-          "|                   | из этого следует ,что минимальный балл это 0. "
-          "                |\n"
-          "|                   | Уровень будет считаться проиденным если балл "
-          "за прохождение   |\n"
-          "|                   | больше уровня в 3 раза (Уровень *3).          "
-          "                |\n"
-          "|                   | Читкоды-(Devlog,RandOff).                     "
-          "                |\n"
-          "|                   |                                               "
-          "                |\n"
-          "|                   |                                               "
-          "                |\n"
-          "+-------------------+-----------------------------------------------"
-          "----------------+\n";
+  cout
+      << "\n"
+         "\n"
+         "\n"
+         "\n"
+         "+-------------------------------------------------------------------"
+         "----------------+\n"
+         "|   Keyboard        "
+         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+         "|           Ninja   "
+         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+         "|                   "
+         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+         "|                   "
+         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+         "+-------------------------------------------------------------------"
+         "----------------+\n"
+         "|                   | Ваша задача : написать слово до того как "
+         "выйдет время.        |\n"
+         "|                   | Каждая оставшаяся секунда записывается в доп "
+         "баллы,           |\n"
+         "|                   | из этого следует ,что минимальный балл это 0. "
+         "                |\n"
+         "|                   | Уровень будет считаться проиденным если балл "
+         "за прохождение   |\n"
+         "|                   | больше уровня  в 3 раза (Уровень *3).          "
+         "                |\n"
+         "|                   | Читкоды-(Devlog,RandOff).                     "
+         "                |\n"
+         "|                   |                                               "
+         "                |\n"
+         "|                   |                                               "
+         "                |\n"
+         "+-------------------+-----------------------------------------------"
+         "----------------+\n";
   cout << "Введите 1 если все понятно(вернуть 1 окно : 2,читы :3)\n";
   cin >> key;
   switch (key) {
@@ -140,11 +144,70 @@ void menu2() {
     menu2();
   }
 }
-void array_test() {
-  for (const auto &i : current_array) {
+// void array_test() {
+// for (const auto &i : current_array) {
 
-    cout << i << endl;
+//  cout << i << endl;
+// }
+//}
+void time_choose() {
+  int key;
+  cout << "Выбери свое время в секундах";
+  cin >> key;
+  time_lev = key;
+}
+
+int wr_check(const string &right) {
+  string in;
+  int tr = 0;
+  while ((in != right) && (tr < 4)) {
+
+    cin >> in;
+    if (in == right) {
+      cout << "Верно" << endl;
+      return 1;
+    } else {
+      cout << "Не верно,заново пиши";
+      tr++;
+    }
   }
+  cout << "Слишком много попыток";
+  return 3;
+}
+int timer_check(long int start) {
+  time_t timer1 = time(NULL);
+
+  if (timer1 - start < time_lev) {
+
+    return (time_lev - (timer1 - start));
+  } else {
+
+    return 0;
+  }
+}
+
+int task() {
+  time_t start = time(NULL);
+  // cout << start << endl;
+  string word = current_array[rand() % 100 - start % 100];
+
+  cout << "Начали \n Пиши слово : " << word << endl;
+
+  if (wr_check(word) != 3) {
+    timer_check(start);
+    if (timer_check(start) != 0) {
+      cout << "Молодец" << endl;
+      points += timer_check(start);
+      cout << points;
+      return 1;
+    }
+    if (wr_check(word) == 3) {
+      cout << "\nПридется заново тебе все делать ";
+    }
+
+  } else
+    cout << "Эх , но не успел\nПридется заново тебе все делать ";
+  return 0;
 }
 
 int main() {
@@ -159,5 +222,8 @@ int main() {
   menu1();
   menu2();
   level_changer();
-  array_test();
+  time_choose();
+  task();
+
+  // array_test();
 }
