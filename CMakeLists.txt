@@ -3,4 +3,4 @@ project(Keyboard_Ninja)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Keyboard_Ninja main.cpp read.cpp read.h)
+add_executable(Keyboard_Ninja main.cpp read.cpp read.h arraywriter.cpp arraywriter.h)

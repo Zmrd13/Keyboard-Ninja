@@ -1,53 +1,57 @@
 #include "read.h"
 #include <ctime>
-#include <fstream>
+
+#include "arraywriter.h"
 #include <iostream>
-const int size = 100;
+
 long int time_lev;
 int points;
 bool level[5];
 int token;
 int flag = 1;
 using namespace std;
-string current_array[size];
+const int size = 100;
 string first_lev[size], second_lev[size], third_lev[size], fourth_lev[size],
     fifth_lev[size];
-void array_writer(string *lev) {
-  for (int i = 0; i < size; i++) {
-    current_array[i] = lev[i];
-  }
-}
+string current_array[100];
 void level_changer() {
 
-  int key;
+  char key;
   cin >> key;
-  token = key;
+  while (!(cin >> key) || (cin.peek() != '\n')) {
+    cin.clear();
+    while (cin.get() != '\n')
+      ;
+    cout << "Буквы это не цифры" << endl;
+  }
 
   switch (key) {
-  case 1:
+  case '1':
     array_writer(first_lev);
     break;
-  case 2:
+  case '2':
     array_writer(second_lev);
     break;
-  case 3:
+  case '3':
     array_writer(third_lev);
     break;
-  case 4:
+  case '4':
     array_writer(fourth_lev);
     break;
-  case 5:
+  case '5':
     array_writer(fifth_lev);
     break;
   default:
     cout << "Уровни от 1 до 5 написано же было,еще раз введи";
-    level_changer();
+
     break;
   }
+
+  token = key;
 }
 
 void menu1() {
-  int key;
+  char key = 0;
   cout << "+-------------------------------------------------------------------"
           "---------------+\n"
           "|   Keyboard        "
@@ -72,14 +76,15 @@ void menu1() {
           "---------------+\n";
   cout << "Введите 1 если все понятно\n";
   cin >> key;
-  if (key != 1) {
+
+  if (key != '1' || cin.fail()) {
     cout << "Повторим!\n";
     menu1();
   } else
     ;
 }
 void menu2() {
-  int key;
+  char key;
   cout << "\n"
           "\n"
           "\n"
@@ -117,11 +122,10 @@ void menu2() {
   cout << "Введите 1 если все понятно(вернуть 1 окно : 2,читы :3)\n";
   cin >> key;
   switch (key) {
-  case 1:
+  case '1':
 
-    level_changer();
     break;
-  case 2:
+  case '2':
     menu1();
   // case3:cin>>cheat;
   default:
@@ -136,7 +140,7 @@ void menu2() {
 // }
 //}
 void time_choose() {
-  int key;
+  char key;
   cout << "Выбери свое время в секундах";
   cin >> key;
   time_lev = key;
@@ -226,7 +230,7 @@ void game() {
   level[2] = false;
   level[3] = false;
   level[4] = false;
-  char key = 'i';
+  char key = 9;
   while (key != 'n') {
     while (points <= 400) {
       cout << "Выбор уровня 1 - 5";
@@ -234,7 +238,7 @@ void game() {
 
       time_choose();
       flag = 1;
-      while ((flag != 0) && (points <= 100)) {
+      while ((flag != 0) && (points <= 400)) {
 
         task();
       }
