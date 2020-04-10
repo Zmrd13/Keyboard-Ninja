@@ -1,3 +1,4 @@
+#include "read.h"
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -42,20 +43,6 @@ void level_changer() {
     cout << "Уровни от 1 до 5 написано же было,еще раз введи";
     level_changer();
     break;
-  }
-}
-
-void read(const string &path, string *lev) {
-
-  ifstream file(path);
-
-  string str;
-
-  int i = 0;
-  while (getline(file, str, '\n')) {
-
-    lev[i] = str;
-    i++;
   }
 }
 
@@ -117,7 +104,7 @@ void menu2() {
           "                |\n"
           "|                   | Уровень будет считаться проиденным если балл "
           "за прохождение   |\n"
-          "|                   | больше 100 раза .         "
+          "|                   | больше 400.         "
           "                |\n"
           "|                   | Читкоды-(Devlog,RandOff).                     "
           "                |\n"
@@ -131,13 +118,12 @@ void menu2() {
   cin >> key;
   switch (key) {
   case 1:
-    cout << "Выберем сложность!(введите два раза тот же уровень чтобы "
-            "подтвердить,считывается последний ваш вариант)\n";
+
     level_changer();
     break;
   case 2:
     menu1();
-    // case3:cin>>cheat;
+  // case3:cin>>cheat;
   default:
     cout << "Видимо пропустил,еще раз посмотри ,что жать надо";
     menu2();
@@ -159,7 +145,7 @@ void time_choose() {
 
 int wr_check(const string &right) {
   string in;
-  int tr = 0;
+
   while ((in != right)) {
 
     cin >> in;
@@ -204,18 +190,19 @@ int task() {
     flag = 0;
 
   } else
+    ;
 
-    return 0;
+  return 0;
 }
 void level_menu() {
-  cout << "+---------------------------------------------------------+\n"
+  cout << "\n+---------------------------------------------------------+\n"
           "|                         |Читкоды заблокированы          |\n"
           "| 1Уровень- "
-       << level[1]
+       << level[0]
        << "             |                               |\n"
           "|                         |                               |\n"
           "| 2Уровень- "
-       << level[2]
+       << level[1]
        << "             +-------------------------------+\n"
           "|                                                         |\n"
           "| 3Уровень- "
@@ -223,20 +210,25 @@ void level_menu() {
        << "                                             |\n"
           "|                                                         |\n"
           "| 4Уровень- "
-       << level[2]
+       << level[3]
        << "                                             |\n"
           "|                                                         |\n"
           "| 5Уровень- "
-       << level[2]
+       << level[4]
        << "                                             |\n"
           "|                                                         |\n"
           "+---------------------------------------------------------+\n";
 }
 
 void game() {
-  char key;
+  level[0] = false;
+  level[1] = false;
+  level[2] = false;
+  level[3] = false;
+  level[4] = false;
+  char key = 'i';
   while (key != 'n') {
-    while (points <= 100) {
+    while (points <= 400) {
       cout << "Выбор уровня 1 - 5";
       level_changer();
 
@@ -253,6 +245,7 @@ void game() {
     cout
         << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи n";
     cin >> key;
+    points = 0;
   }
   exit(1);
 }
