@@ -4,7 +4,8 @@
 const int size = 100;
 long int time_lev;
 int points;
-
+bool level[5];
+int token;
 int flag = 1;
 using namespace std;
 string current_array[size];
@@ -19,6 +20,7 @@ void level_changer() {
 
   int key;
   cin >> key;
+  token = key;
 
   switch (key) {
   case 1:
@@ -91,41 +93,40 @@ void menu1() {
 }
 void menu2() {
   int key;
-  cout
-      << "\n"
-         "\n"
-         "\n"
-         "\n"
-         "+-------------------------------------------------------------------"
-         "----------------+\n"
-         "|   Keyboard        "
-         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-         "|           Ninja   "
-         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-         "|                   "
-         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-         "|                   "
-         "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
-         "+-------------------------------------------------------------------"
-         "----------------+\n"
-         "|                   | Ваша задача : написать слово до того как "
-         "выйдет время.        |\n"
-         "|                   | Каждая оставшаяся секунда записывается в доп "
-         "баллы,           |\n"
-         "|                   | из этого следует ,что минимальный балл это 0. "
-         "                |\n"
-         "|                   | Уровень будет считаться проиденным если балл "
+  cout << "\n"
+          "\n"
+          "\n"
+          "\n"
+          "+-------------------------------------------------------------------"
+          "----------------+\n"
+          "|   Keyboard        "
+          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+          "|           Ninja   "
+          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+          "|                   "
+          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+          "|                   "
+          "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |\n"
+          "+-------------------------------------------------------------------"
+          "----------------+\n"
+          "|                   | Ваша задача : написать слово до того как "
+          "выйдет время.        |\n"
+          "|                   | Каждая оставшаяся секунда записывается в доп "
+          "баллы,           |\n"
+          "|                   | из этого следует ,что минимальный балл это 0. "
+          "                |\n"
+          "|                   | Уровень будет считаться проиденным если балл "
           "за прохождение   |\n"
           "|                   | больше 100 раза .         "
           "                |\n"
           "|                   | Читкоды-(Devlog,RandOff).                     "
-         "                |\n"
-         "|                   |                                               "
-         "                |\n"
-         "|                   |                                               "
-         "                |\n"
-         "+-------------------+-----------------------------------------------"
-         "----------------+\n";
+          "                |\n"
+          "|                   |                                               "
+          "                |\n"
+          "|                   |                                               "
+          "                |\n"
+          "+-------------------+-----------------------------------------------"
+          "----------------+\n";
   cout << "Введите 1 если все понятно(вернуть 1 окно : 2,читы :3)\n";
   cin >> key;
   switch (key) {
@@ -206,22 +207,56 @@ int task() {
 
     return 0;
 }
+void level_menu() {
+  cout << "+---------------------------------------------------------+\n"
+          "|                         |Читкоды заблокированы          |\n"
+          "| 1Уровень- "
+       << level[1]
+       << "             |                               |\n"
+          "|                         |                               |\n"
+          "| 2Уровень- "
+       << level[2]
+       << "             +-------------------------------+\n"
+          "|                                                         |\n"
+          "| 3Уровень- "
+       << level[2]
+       << "                                             |\n"
+          "|                                                         |\n"
+          "| 4Уровень- "
+       << level[2]
+       << "                                             |\n"
+          "|                                                         |\n"
+          "| 5Уровень- "
+       << level[2]
+       << "                                             |\n"
+          "|                                                         |\n"
+          "+---------------------------------------------------------+\n";
+}
+
 void game() {
+  char key;
+  while (key != 'n') {
+    while (points <= 100) {
+      cout << "Выбор уровня 1 - 5";
+      level_changer();
 
-  while (points <= 100) {
-    cout << "Выбор уровня 1 - 5";
-    level_changer();
-    time_choose();
-    flag = 1;
-    while ((flag != 0) && (points <= 100)) {
+      time_choose();
+      flag = 1;
+      while ((flag != 0) && (points <= 100)) {
 
-      task();
+        task();
+      }
     }
+    level[token] = true;
+
+    level_menu();
+    cout
+        << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи n";
   }
+  exit(1);
 }
 
 int main() {
-
 
   read("1s.txt", first_lev);
   read("2s.txt", second_lev);
@@ -229,6 +264,8 @@ int main() {
   read("4s.txt", fourth_lev);
   read("5s.txt", fifth_lev);
   menu1();
+  level_menu();
+
   menu2();
   game();
   // array_test();
