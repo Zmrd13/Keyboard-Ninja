@@ -1,9 +1,42 @@
 #include <fstream>
 #include <iostream>
+const int size = 100;
 using namespace std;
-void _menu3() {}
+string current_array[size];
+string first_lev[size], second_lev[size], third_lev[size], fourth_lev[size],
+    fifth_lev[size];
+void array_writer(string *lev) {
+  for (int i = 0; i < size; i++) {
+    current_array[i] = lev[i];
+  }
+}
+void level_changer() {
+  int key;
+  cin >> key;
+  switch (key) {
+  case 1:
+    array_writer(first_lev);
+    break;
+  case 2:
+    array_writer(second_lev);
+    break;
+  case 3:
+    array_writer(third_lev);
+    break;
+  case 4:
+    array_writer(fourth_lev);
+    break;
+  case 5:
+    array_writer(fifth_lev);
+    break;
+  default:
+    cout << "Уровни от 1 до 5 написано же было,еще раз введи";
+    level_changer();
+    break;
+  }
+}
 
-void _read(const string &path, string *lev) {
+void read(const string &path, string *lev) {
 
   ifstream file(path);
 
@@ -23,7 +56,7 @@ void _read(const string &path, string *lev) {
   cout << "2-done" << endl;
 }
 
-void _menu1() {
+void menu1() {
   int key;
   cout << "+-------------------------------------------------------------------"
           "---------------+\n"
@@ -51,11 +84,11 @@ void _menu1() {
   cin >> key;
   if (key != 1) {
     cout << "Повторим!\n";
-    _menu1();
+    menu1();
   } else
     ;
 }
-void _menu2() {
+void menu2() {
   int key;
   cout << "\n"
           "\n"
@@ -95,26 +128,36 @@ void _menu2() {
   cin >> key;
   switch (key) {
   case 1:
-    cout << "Выберем сложность!\n";
-    _menu3();
+    cout << "Выберем сложность!(введите два раза тот же уровень чтобы "
+            "подтвердить,считывается последний ваш вариант)\n";
+    level_changer();
     break;
   case 2:
-    _menu1();
+    menu1();
   // case3:cin>>cheat;
   default:
     cout << "Видимо пропустил,еще раз посмотри ,что жать надо";
-    _menu2();
+    menu2();
   }
 }
+void array_test() {
+  for (const auto &i : current_array) {
+
+    cout << i << endl;
+  }
+}
+
 int main() {
+
   system("CLS");
-  string first_lev[100], second_lev[100], third_lev[100], fourth_lev[100],
-      fifth_lev[100];
-  _read("1s.txt", first_lev);
-  _read("2s.txt", second_lev);
-  _read("3s.txt", third_lev);
-  _read("4s.txt", fourth_lev);
-  _read("5s.txt", fifth_lev);
-  _menu1();
-  _menu2();
+
+  read("1s.txt", first_lev);
+  read("2s.txt", second_lev);
+  read("3s.txt", third_lev);
+  read("4s.txt", fourth_lev);
+  read("5s.txt", fifth_lev);
+  menu1();
+  menu2();
+  level_changer();
+  array_test();
 }
