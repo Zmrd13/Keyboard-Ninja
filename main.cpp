@@ -22,6 +22,13 @@ void level_changer() {
   cin >> key;
   token = key;
 
+  cin >> key;
+  while (!(cin >> key) || (cin.peek() != '\n')) {
+    cin.clear();
+    while (cin.get() != '\n')
+      ;
+    cout << "Буквы это не цифры" << endl;
+  }
   switch (key) {
   case 1:
     array_writer(first_lev);
@@ -85,6 +92,13 @@ void menu1() {
           "---------------+\n";
   cout << "Введите 1 если все понятно\n";
   cin >> key;
+
+  while (!(cin >> key) || (cin.peek() != '\n')) {
+    cin.clear();
+    while (cin.get() != '\n')
+      ;
+    cout << "Буквы это не цифры" << endl;
+  }
   if (key != 1) {
     cout << "Повторим!\n";
     menu1();
@@ -129,6 +143,13 @@ void menu2() {
           "----------------+\n";
   cout << "Введите 1 если все понятно(вернуть 1 окно : 2,читы :3)\n";
   cin >> key;
+
+  while (!(cin >> key) || (cin.peek() != '\n')) {
+    cin.clear();
+    while (cin.get() != '\n')
+      ;
+    cout << "Буквы это не цифры" << endl;
+  }
   switch (key) {
   case 1:
  
@@ -258,6 +279,7 @@ void game() {
     cout
         << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи n";
     cin >> key;
+
     points = 0;
   }
   exit(1);
