@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.13)
 project(Keyboard_Ninja)
 
 set(CMAKE_CXX_STANDARD 14)
