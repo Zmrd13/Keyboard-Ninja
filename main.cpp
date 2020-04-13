@@ -1,7 +1,10 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+
 #include <string>
+
+
 
 //Список переменных
 const int SIZE_MASSIVE =
@@ -12,6 +15,7 @@ bool selectionLevel[5]; //Флаг проидености уровня.
 int Token;
 int Flag = 1;
 using namespace std;
+
 
 string currentArray[SIZE_MASSIVE];
 string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
@@ -56,6 +60,7 @@ void menu1() {
   cout << "Введите 1 если все понятно\n";
 
   key = inputCheck();
+
   if (key != 1) {
     cout << "Повторим!\n";
     menu1();
@@ -190,6 +195,7 @@ void timeChoose() {
   cout << "Выбери свое время в секундах";
 
   levelTime = inputCheck();
+
   cout << "Начали \n Пиши слово : ";
 }
 
@@ -222,6 +228,7 @@ int timerCheck(long int start) {
   }
 }
 
+
 int setTask() {
 
   time_t start = time(NULL);
@@ -233,6 +240,7 @@ int setTask() {
   if (writeCheck(word) != 3) {
     timerCheck(start);
     if (timerCheck(start) > 0) {
+
       cout << "Молодец" << endl;
       Points += timerCheck(start);
       cout << "Очков=" << Points << endl;
@@ -241,11 +249,14 @@ int setTask() {
     cout << "Но не успел,все заново" << endl;
     Flag = 0;
 
+
   } else
     ;
 
   return 0;
 }
+
+
 
 void setGameMenu() {
   cout << "\n+---------------------------------------------------------+\n"
@@ -287,7 +298,7 @@ void startGame() {
 
       timeChoose();
       Flag = 1;
-      while ((Flag != 0) && (Points <= 100)) {
+      while ((Flag != 0) && (Points <= 400)) {
 
         setTask();
       }
