@@ -1,7 +1,7 @@
 #include <ctime>
-#include <fstream>
-#include <iostream>
 
+#include "src/lib/ArrProc.h"
+#include <iostream>
 #include <string>
 
 //Список переменных
@@ -19,9 +19,9 @@ string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
     levelFour[SIZE_MASSIVE], levelFive[SIZE_MASSIVE]; //Массив уровней
 
 //Методы
-void arrayWrite(string *lev);
+
 void getLevel();
-void readLevelFile(const string &path, string *lev);
+
 void timeChoose();
 int writeCheck(const string &right);
 int timerCheck(long int start);
@@ -133,12 +133,6 @@ int main() {
   // array_test();
 }
 
-void arrayWrite(string *lev) {
-  for (int i = 0; i < SIZE_MASSIVE; i++) {
-    currentArray[i] = lev[i];
-  }
-}
-
 void getLevel() {
   cout << endl;
   int key;
@@ -169,19 +163,7 @@ void getLevel() {
   }
 }
 
-void readLevelFile(const string &path, string *lev) {
 
-  ifstream file(path);
-
-  string str;
-
-  int i = 0;
-  while (getline(file, str, '\n')) {
-
-    lev[i] = str;
-    i++;
-  }
-}
 
 void timeChoose() {
 
