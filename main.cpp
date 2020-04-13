@@ -4,8 +4,6 @@
 
 #include <string>
 
-
-
 //Список переменных
 const int SIZE_MASSIVE =
     100; //Константа, размер массивов для выборки слов из текстовых файлов
@@ -15,7 +13,6 @@ bool selectionLevel[5]; //Флаг проидености уровня.
 int Token;
 int Flag = 1;
 using namespace std;
-
 
 string currentArray[SIZE_MASSIVE];
 string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
@@ -58,9 +55,7 @@ void menu1() {
           "+-------------------+-----------------------------------------------"
           "---------------+\n";
   cout << "Введите 1 если все понятно\n";
-
   key = inputCheck();
-
   if (key != 1) {
     cout << "Повторим!\n";
     menu1();
@@ -108,7 +103,6 @@ void menu2() {
 
   switch (key) {
   case 1:
-
     break;
   case 2:
     menu1();
@@ -126,16 +120,14 @@ void menu2() {
 //}
 
 int main() {
-
   readLevelFile("1s.txt", levelOne);
   readLevelFile("2s.txt", levelTwo);
   readLevelFile("3s.txt", levelThree);
   readLevelFile("4s.txt", levelFour);
   readLevelFile("5s.txt", levelFive);
   menu1();
-  setGameMenu();
-
   menu2();
+  setGameMenu();
   startGame();
   // array_test();
 }
@@ -228,7 +220,6 @@ int timerCheck(long int start) {
   }
 }
 
-
 int setTask() {
 
   time_t start = time(NULL);
@@ -249,14 +240,11 @@ int setTask() {
     cout << "Но не успел,все заново" << endl;
     Flag = 0;
 
-
   } else
     ;
 
   return 0;
 }
-
-
 
 void setGameMenu() {
   cout << "\n+---------------------------------------------------------+\n"
