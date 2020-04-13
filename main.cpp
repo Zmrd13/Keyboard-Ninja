@@ -278,8 +278,8 @@ void startGame() {
   selectionLevel[2] = false;
   selectionLevel[3] = false;
   selectionLevel[4] = false;
-  char key = 'i';
-  while (key != 'n') {
+  int key = 'i';
+  while (key != 99) {
     while (Points <= 400) {
       cout << "Выбор уровня 1 - 5";
       getLevel();
@@ -294,11 +294,12 @@ void startGame() {
     selectionLevel[Token] = true;
 
     setGameMenu();
-    cout
-        << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи n";
-    cin >> key;
+    cout << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи "
+            "99";
+    key = inputCheck();
     Points = 0;
   }
+  cout << "GAME OVER";
   exit(1);
 }
 
