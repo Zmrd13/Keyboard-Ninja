@@ -108,7 +108,7 @@ void menu2() {
     menu1();
     // case3:cin>>cheat;
   default:
-    cout << "Видимо пропустил,еще раз посмотри ,что жать надо";
+    cout << "Видимо пропустил,еще раз посмотри ,что жать надо\n";
     menu2();
   }
 }
@@ -163,7 +163,7 @@ void getLevel() {
     arrayWrite(levelFive);
     break;
   default:
-    cout << "Уровни от 1 до 5 написано же было,еще раз введи";
+    cout << "Уровни от 1 до 5 написано же было,еще раз введи\n";
     getLevel();
     break;
   }
@@ -185,7 +185,7 @@ void readLevelFile(const string &path, string *lev) {
 
 void timeChoose() {
 
-  cout << "Выбери свое время в секундах";
+  cout << "Выбери свое время в секундах\n";
 
   levelTime = inputCheck();
 
@@ -203,7 +203,7 @@ int writeCheck(const string &right) {
       return 1;
     }
     if (in != right) {
-      cout << "Не верно,заново пиши";
+      cout << "Не верно,заново пиши\n";
     }
   }
   return 0;
@@ -300,7 +300,7 @@ void startGame() {
     key = inputCheck();
     Points = 0;
   }
-  cout << "GAME OVER";
+  cout << "GAME OVER\n";
   exit(1);
 }
 
