@@ -1,70 +1,37 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
-const int size = 100;
-long int time_lev;
-int points;
-bool level[5];
-int token;
-int flag = 1;
+
+#include <string>
+
+
+
+//Список переменных
+const int SIZE_MASSIVE =
+    100; //Константа, размер массивов для выборки слов из текстовых файлов
+long int levelTime; //Время для уровней
+int Points;
+bool selectionLevel[5]; //Флаг проидености уровня.
+int Token;
+int Flag = 1;
 using namespace std;
-string current_array[size];
-string first_lev[size], second_lev[size], third_lev[size], fourth_lev[size],
-    fifth_lev[size];
-void array_writer(string *lev) {
-  for (int i = 0; i < size; i++) {
-    current_array[i] = lev[i];
-  }
-}
-void level_changer() {
 
-  int key;
-  cin >> key;
-  token = key;
 
-  cin >> key;
-  while (!(cin >> key) || (cin.peek() != '\n')) {
-    cin.clear();
-    while (cin.get() != '\n')
-      ;
-    cout << "Буквы это не цифры" << endl;
-  }
-  switch (key) {
-  case 1:
-    array_writer(first_lev);
-    break;
-  case 2:
-    array_writer(second_lev);
-    break;
-  case 3:
-    array_writer(third_lev);
-    break;
-  case 4:
-    array_writer(fourth_lev);
-    break;
-  case 5:
-    array_writer(fifth_lev);
-    break;
-  default:
-    cout << "Уровни от 1 до 5 написано же было,еще раз введи";
-    level_changer();
-    break;
-  }
-}
+string currentArray[SIZE_MASSIVE];
+string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
+    levelFour[SIZE_MASSIVE], levelFive[SIZE_MASSIVE]; //Массив уровней
 
-void read(const string &path, string *lev) {
-
-  ifstream file(path);
-
-  string str;
-
-  int i = 0;
-  while (getline(file, str, '\n')) {
-
-    lev[i] = str;
-    i++;
-  }
-}
+//Методы
+void arrayWrite(string *lev);
+void getLevel();
+void readLevelFile(const string &path, string *lev);
+void timeChoose();
+int writeCheck(const string &right);
+int timerCheck(long int start);
+int setTask();
+void setGameMenu();
+void startGame();
+int inputCheck();
 
 void menu1() {
   int key;
@@ -91,14 +58,9 @@ void menu1() {
           "+-------------------+-----------------------------------------------"
           "---------------+\n";
   cout << "Введите 1 если все понятно\n";
-  cin >> key;
 
-  while (!(cin >> key) || (cin.peek() != '\n')) {
-    cin.clear();
-    while (cin.get() != '\n')
-      ;
-    cout << "Буквы это не цифры" << endl;
-  }
+  key = inputCheck();
+
   if (key != 1) {
     cout << "Повторим!\n";
     menu1();
@@ -142,42 +104,102 @@ void menu2() {
           "+-------------------+-----------------------------------------------"
           "----------------+\n";
   cout << "Введите 1 если все понятно(вернуть 1 окно : 2,читы :3)\n";
-  cin >> key;
+  key = inputCheck();
 
-  while (!(cin >> key) || (cin.peek() != '\n')) {
-    cin.clear();
-    while (cin.get() != '\n')
-      ;
-    cout << "Буквы это не цифры" << endl;
-  }
   switch (key) {
   case 1:
- 
-    level_changer();
+
     break;
   case 2:
     menu1();
-  // case3:cin>>cheat;
+    // case3:cin>>cheat;
   default:
     cout << "Видимо пропустил,еще раз посмотри ,что жать надо";
     menu2();
   }
 }
 // void array_test() {
-// for (const auto &i : current_array) {
+// for (const auto &i : currentArray) {
 
 //  cout << i << endl;
 // }
 //}
-void time_choose() {
+
+int main() {
+
+  readLevelFile("1s.txt", levelOne);
+  readLevelFile("2s.txt", levelTwo);
+  readLevelFile("3s.txt", levelThree);
+  readLevelFile("4s.txt", levelFour);
+  readLevelFile("5s.txt", levelFive);
+  menu1();
+  setGameMenu();
+
+  menu2();
+  startGame();
+  // array_test();
+}
+
+void arrayWrite(string *lev) {
+  for (int i = 0; i < SIZE_MASSIVE; i++) {
+    currentArray[i] = lev[i];
+  }
+}
+
+void getLevel() {
+
   int key;
+  key = inputCheck();
+
+  Token = key;
+
+  switch (key) {
+  case 1:
+    arrayWrite(levelOne);
+    break;
+  case 2:
+    arrayWrite(levelTwo);
+    break;
+  case 3:
+    arrayWrite(levelThree);
+    break;
+  case 4:
+    arrayWrite(levelFour);
+    break;
+  case 5:
+    arrayWrite(levelFive);
+    break;
+  default:
+    cout << "Уровни от 1 до 5 написано же было,еще раз введи";
+    getLevel();
+    break;
+  }
+}
+
+void readLevelFile(const string &path, string *lev) {
+
+  ifstream file(path);
+
+  string str;
+
+  int i = 0;
+  while (getline(file, str, '\n')) {
+
+    lev[i] = str;
+    i++;
+  }
+}
+
+void timeChoose() {
+
   cout << "Выбери свое время в секундах";
-  cin >> key;
-  time_lev = key;
+
+  levelTime = inputCheck();
+
   cout << "Начали \n Пиши слово : ";
 }
 
-int wr_check(const string &right) {
+int writeCheck(const string &right) {
   string in;
 
   while ((in != right)) {
@@ -193,109 +215,113 @@ int wr_check(const string &right) {
   }
   return 0;
 }
-int timer_check(long int start) {
+
+int timerCheck(long int start) {
   time_t timer1 = time(NULL);
 
-  if (timer1 - start < time_lev) {
+  if (timer1 - start < levelTime) {
 
-    return (time_lev - (timer1 - start));
+    return (levelTime - (timer1 - start));
   } else {
 
     return 0;
   }
 }
 
-int task() {
+
+int setTask() {
 
   time_t start = time(NULL);
   // cout << start << endl;
-  string word = current_array[start % 100];
+  string word = currentArray[start % 100];
 
   cout << "Пиши слово : " << word << endl;
 
-  if (wr_check(word) != 3) {
-    timer_check(start);
-    if (timer_check(start) > 0) {
+  if (writeCheck(word) != 3) {
+    timerCheck(start);
+    if (timerCheck(start) > 0) {
+
       cout << "Молодец" << endl;
-      points += timer_check(start);
-      cout << points;
+      Points += timerCheck(start);
+      cout << "Очков=" << Points << endl;
       return 1;
     }
-    flag = 0;
+    cout << "Но не успел,все заново" << endl;
+    Flag = 0;
+
 
   } else
     ;
 
   return 0;
 }
-void level_menu() {
+
+
+
+void setGameMenu() {
   cout << "\n+---------------------------------------------------------+\n"
           "|                         |Читкоды заблокированы          |\n"
           "| 1Уровень- "
-       << level[0]
+       << selectionLevel[0]
        << "             |                               |\n"
           "|                         |                               |\n"
           "| 2Уровень- "
-       << level[1]
+       << selectionLevel[1]
        << "             +-------------------------------+\n"
           "|                                                         |\n"
           "| 3Уровень- "
-       << level[2]
+       << selectionLevel[2]
        << "                                             |\n"
           "|                                                         |\n"
           "| 4Уровень- "
-       << level[3]
+       << selectionLevel[3]
        << "                                             |\n"
           "|                                                         |\n"
           "| 5Уровень- "
-       << level[4]
+       << selectionLevel[4]
        << "                                             |\n"
           "|                                                         |\n"
           "+---------------------------------------------------------+\n";
 }
 
-void game() {
-  level[0] = false;
-  level[1] = false;
-  level[2] = false;
-  level[3] = false;
-  level[4] = false;
+void startGame() {
+  selectionLevel[0] = false;
+  selectionLevel[1] = false;
+  selectionLevel[2] = false;
+  selectionLevel[3] = false;
+  selectionLevel[4] = false;
   char key = 'i';
   while (key != 'n') {
-    while (points <= 400) {
+    while (Points <= 400) {
       cout << "Выбор уровня 1 - 5";
-      level_changer();
+      getLevel();
 
-      time_choose();
-      flag = 1;
-      while ((flag != 0) && (points <= 100)) {
+      timeChoose();
+      Flag = 1;
+      while ((Flag != 0) && (Points <= 400)) {
 
-        task();
+        setTask();
       }
     }
-    level[token] = true;
+    selectionLevel[Token] = true;
 
-    level_menu();
+    setGameMenu();
     cout
         << "Продолжишь или нет?Если да то введи любую кнопку ,если нет введи n";
     cin >> key;
-
-    points = 0;
+    Points = 0;
   }
   exit(1);
 }
 
-int main() {
+int inputCheck() {
+  int in;
 
-  read("1s.txt", first_lev);
-  read("2s.txt", second_lev);
-  read("3s.txt", third_lev);
-  read("4s.txt", fourth_lev);
-  read("5s.txt", fifth_lev);
-  menu1();
-  level_menu();
-
-  menu2();
-  game();
-  // array_test();
+  while (!(cin >> in) || (cin.peek() != '\n')) {
+    cin.clear();
+    while (cin.get() != '\n')
+      ;
+    cout << "Буквы это не цифры" << endl;
+  }
+  return in;
 }
