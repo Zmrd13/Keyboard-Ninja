@@ -34,7 +34,7 @@ void menu1() {
           "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|\n"
           "+-------------------------------------------------------------------"
           "---------------+\n"
-          "| /                  |                                              "
+          "| /                  | Выход  :введите exit                         "
           "            \\  |\n"
           "|                    |  Тут есть 5 уровней сложности .              "
           "               |\n"

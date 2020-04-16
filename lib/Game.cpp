@@ -173,8 +173,13 @@ int inputCheck() {
   while (!(cin >> in) || (cin.peek() != '\n')) {
     cin.clear();
     while (cin.get() != '\n')
-      ;
+      ;  if(in ='exit')
+      {
+          exit(1);
+      }
     cout << "Буквы это не цифры" << endl;
   }
+
+
   return in;
 }
