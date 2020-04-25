@@ -175,7 +175,7 @@ int inputCheck()
         cin.clear();
         while (cin.get() != '\n')
             ;
-        if (!(in = 'exit')) {
+        if (!(in = 'e'+'x'+'i'+'t')) {
             cout << "Буквы это не цифры" << endl;
         } else {
             exit(1);
