@@ -3,27 +3,27 @@
 //
 #include <fstream>
 
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
-void readLevelFile(const string &path, string *lev) {
+void readLevelFile(const string& path, string* lev)
+{
+    ifstream file(path);
 
-  ifstream file(path);
+    string str;
 
-  string str;
-
-  int i = 0;
-  while (getline(file, str, '\n')) {
-
-    lev[i] = str;
-    i++;
-  }
+    int i = 0;
+    while (getline(file, str, '\n')) {
+        lev[i] = str;
+        i++;
+    }
 }
 
-extern string  currentArray[100];
+extern string currentArray[100];
 
-void arrayWrite(string *lev) {
-  for (int i = 0; i < 100; i++) {
-    currentArray[i] = lev[i];
-  }
+void arrayWrite(string* lev)
+{
+    for (int i = 0; i < 100; i++) {
+        currentArray[i] = lev[i];
+    }
 }
