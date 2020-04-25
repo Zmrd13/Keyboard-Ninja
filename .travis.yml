@@ -3,6 +3,6 @@ compiler: gсс
 dist: xenial
 
 script:
-- git ls-files src/ | xargs clang-format -i && git diff --exit-code
+- git ls-files src/!*.txt | xargs clang-format -i && git diff --exit-code
 - cmake CMakeLists.txt 
 - make
