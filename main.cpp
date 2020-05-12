@@ -22,15 +22,15 @@ string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
 int main()
 {
     setLocation();
-    readLevelFile("build/bin/1s.txt", levelOne);
-    readLevelFile("build/bin/2s.txt", levelTwo);
-    readLevelFile("build/bin/3s.txt", levelThree);
-    readLevelFile("build/bin/4s.txt", levelFour);
-    readLevelFile("build/bin/5s.txt", levelFive);
+    ReadLevelFile("build/bin/1s.txt", levelOne);
+    ReadLevelFile("build/bin/2s.txt", levelTwo);
+    ReadLevelFile("build/bin/3s.txt", levelThree);
+    ReadLevelFile("build/bin/4s.txt", levelFour);
+    ReadLevelFile("build/bin/5s.txt", levelFive);
     GameMenuOne();
     GameMenuTwo();
-    setGameMenu();
-    startGame();
+    PrintGameMenu();
+    StartGame();
     system("PAUSE");
 }
 
