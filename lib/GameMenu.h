@@ -1,0 +1,8 @@
+//
+// Created by User on 12.05.2020.
+//
+
+#ifndef KEYBOARD_NINJA_GAMEMENU_H
+#define KEYBOARD_NINJA_GAMEMENU_H
+
+#endif //KEYBOARD_NINJA_GAMEMENU_H
