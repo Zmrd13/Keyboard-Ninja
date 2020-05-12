@@ -1,2 +1,2 @@
 #!/bin/bash
- cmake  CMakeLists.txt ; sudo make
+cmake CMakeLists.txt && make
