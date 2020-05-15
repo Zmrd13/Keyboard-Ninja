@@ -1,5 +1,5 @@
 
-#include "lib/ruConsole.h"
+
 #include "lib/ArrProc.h"
 #include "lib/GameMenu.h"
 #include "lib/Game.h"
@@ -21,7 +21,7 @@ string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
 
 int main()
 {
-    setLocation();
+
     ReadLevelFile("build/bin/1s.txt", levelOne);
     ReadLevelFile("build/bin/2s.txt", levelTwo);
     ReadLevelFile("build/bin/3s.txt", levelThree);

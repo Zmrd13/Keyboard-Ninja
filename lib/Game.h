@@ -96,21 +96,18 @@ void TimeChoose()
     cout << "Начали \n Пиши слово : ";
 }
 
-int WriteCheck(const string& right)
+int WriteCheck(const string& right,const string& input)
 {
-    string in;
-
-    while ((in != right)) {
-        cin >> in;
-        if (in == right) {
+        if (input == right) {
             cout << "\nВерно" << endl;
+            return 0;
+        }
+        if (input != right) {
+
             return 1;
         }
-        if (in != right) {
-            cout << "Не верно,заново пиши\n";
-        }
-    }
-    return 0;
+
+
 }
 
 int TimerCheck(long int start)
@@ -125,24 +122,32 @@ int TimerCheck(long int start)
 }
 
 int SetTask()
-{
+{int fl=0;
     time_t start = time(NULL);
     // cout << start << endl;
     string word = currentArray[start % 100];
-
+string input;
     cout << "Пиши слово : " << word << endl;
-
-    if (WriteCheck(word) != 3) {
+cin >>input;
+    if (WriteCheck(word,input) == 0) {
         TimerCheck(start);
         if (TimerCheck(start) > 0) {
             cout << "Молодец" << endl;
             Points += TimerCheck(start);
             cout << "Очков=" << Points << endl;
-            return 1;
+            return 0;
         }
-        cout << "Но не успел,все заново" << endl;
-        Flag = 0;
+        else{
+            cout<<"Не влез во время";
+        }
 
+
+    }
+    if(WriteCheck(word,input)==1) {
+        cout << "Не верно,ты опечатался\n";
+        cout << "Ты проиграл" << endl;
+        Flag = 0;
+        return 0;
     } else
         ;
 
