@@ -25,11 +25,12 @@ int InputCheck()
 
     while (!(cin >> in) || (cin.peek() != '\n')) {
         cin.clear();
+
         while (cin.get() != '\n')
             ;
 
         cout<<"Вы ввели не то ,что нужно .";
-            exit(14);
+            return 0;
 
     }
 
@@ -39,8 +40,12 @@ int InputCheck()
 void SelectLevel()
 {
     cout << endl;
-    int key;
-    key = InputCheck();
+
+    int key=0;
+    while(key==0){
+        key=InputCheck();
+
+    }
 
     Token = key;
 
@@ -79,7 +84,7 @@ void PrintGameMenu()
             "║•••••••••••••••••••••••╚════════════════════════════════════════════════════════╝•••••••••••••••••••••••║\n"
             "║••••••••••••╔═══════════════╤═══════════════╤═══════════════╤═══════════════╤═══════════════╗•••••••••••║\n"
             "║••••••••••••║               │               │               │               │               ║•••••••••••║\n"
-            "║••••••••••••║ Уровень 1 - "<< selectionLevel[0] <<" │ Уровень 2 - "<< selectionLevel[1] <<" │ Уровень 3 - "<< selectionLevel[2] <<" │ Уровень 4 - "<< selectionLevel[3] <<" │ Уровень 5 - "<< selectionLevel[5] <<" ║•••••••••••║\n"
+            "║••••••••••••║ Уровень 1 - "<< selectionLevel[0] <<" │ Уровень 2 - "<< selectionLevel[1] <<" │ Уровень 3 - "<< selectionLevel[2] <<" │ Уровень 4 - "<< selectionLevel[3] <<" │ Уровень 5 - "<< selectionLevel[4] <<" ║•••••••••••║\n"
             "║••••••••••••║               │               │               │               │               ║•••••••••••║\n"
             "║••••••••••••╚═══════════════╧═══════════════╧═══════════════╧═══════════════╧═══════════════╝•••••••••••║\n"
             "║••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••║\n"
@@ -89,8 +94,12 @@ void PrintGameMenu()
 void TimeChoose()
 {
     cout << "Выбери свое время в секундах\n";
+    int key=0;
+while(key==0){
+ key=InputCheck();
 
-    levelTime = InputCheck();
+}
+    levelTime = key;
 
     cout << "Начали \n Пиши слово : ";
 }
@@ -171,7 +180,7 @@ void StartGame()
                 SetTask();
             }
         }
-        selectionLevel[Token] = true;
+        selectionLevel[Token-1] = true;
 
         PrintGameMenu();
         cout << "Продолжишь или нет?Если да то введи любую кнопку ,если нет "
