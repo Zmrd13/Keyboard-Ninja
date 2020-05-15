@@ -38,3 +38,5 @@ tests/bin/*
 CMakeCache.txt
 CMakeFiles
 build
+*.cmake
+Makefile
