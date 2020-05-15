@@ -27,11 +27,10 @@ int InputCheck()
         cin.clear();
         while (cin.get() != '\n')
             ;
-        if (!(in = 'e'+'x'+'i'+'t')) {
-            cout << "Буквы это не цифры" << endl;
-        } else {
-            exit(1);
-        }
+
+        cout<<"Вы ввели не то ,что нужно .";
+            exit(14);
+
     }
 
     return in;
