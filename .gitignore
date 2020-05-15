@@ -33,3 +33,10 @@
 
 # Test binaries
 tests/bin/*
+
+# cmake files and directories
+CMakeCache.txt
+CMakeFiles
+build
+*.cmake
+Makefile
