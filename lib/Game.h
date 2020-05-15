@@ -106,16 +106,12 @@ while(key==0){
 
 int WriteCheck(const string& right,const string& input)
 {
-        if (input == right) {
+        if (input == right)
+        {
             cout << "\nВерно" << endl;
             return 0;
         }
-        if (input != right) {
-
-            return 1;
-        }
-
-
+        else return 1;
 }
 
 int TimerCheck(long int start)

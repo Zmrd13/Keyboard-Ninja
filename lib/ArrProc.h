@@ -8,20 +8,23 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "LevelFileReader.h"
 
 using namespace std;
 
-void ReadLevelFile(const string& path, string* lev)
+void ReadLevelFile(const string& path, string* words)
 {
     ifstream file(path);
+    LevelFileReader fileReader(file);
 
-    string str;
-
-    int i = 0;
-    while (getline(file, str, '\n')) {
-        lev[i] = str;
-        i++;
+    for (int i = 0; true; i++)
+    {
+      string str = fileReader.GetWord();
+      if (str == "") break;
+      words[i] = str;
     }
+
+    return;
 }
 
 extern string currentArray[100];
