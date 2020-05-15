@@ -19,6 +19,7 @@ string currentArray[SIZE_MASSIVE];
 string levelOne[SIZE_MASSIVE], levelTwo[SIZE_MASSIVE], levelThree[SIZE_MASSIVE],
         levelFour[SIZE_MASSIVE], levelFive[SIZE_MASSIVE]; //Массив уровней
 
+
 int main()
 {
 
