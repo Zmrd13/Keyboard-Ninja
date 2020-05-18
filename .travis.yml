@@ -1,5 +1,5 @@
 language: cpp
-compiler: gсс
+compiler: g++
 dist: xenial
 
 script:
