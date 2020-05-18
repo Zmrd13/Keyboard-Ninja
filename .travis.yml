@@ -5,6 +5,6 @@ dist: xenial
 script:
 - git ls-files src/!*.txt | xargs clang-format -i && git diff --exit-code
 - echo "Compiling gtests ..."
-- g++ -Wall tests/main.cpp tests/LevelFileReaderTest.cpp ../lib/LevelFileReader.cpp tests/ArrProcTest.cpp -o Gtests.exe -lgtest
+- g++ -Wall tests/main.cpp tests/LevelFileReaderTest.cpp lib/LevelFileReader.cpp tests/ArrProcTest.cpp -o Gtests.exe -lgtest
 - cmake CMakeLists.txt 
 - make
