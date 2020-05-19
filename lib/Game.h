@@ -20,15 +20,14 @@ extern long int levelTime;
 extern string levelOne[100], levelTwo[100], levelThree[100], levelFour[100],
         levelFive[100]; //Массив уровней
 
-int InputCheck(const string& getLevelNumber)
+int InputCheck(string getLevelNumber)
 {
     int Number = 0;
     if (getLevelNumber == "exit") {
-        return 1337;
         exit(1);
     }
-    if (atoi(getLevelNumber.c_str()) ==0 ) {
-        cout << "Wrong input";
+    if (atoi(getLevelNumber.c_str()) == 0) {
+
         return 0;
     }
     Number = atoi(getLevelNumber.c_str()); //
@@ -108,14 +107,13 @@ void PrintGameMenu()
 void TimeChoose()
 {
     cout << "Выбери свое время в секундах\n";
-    string key="0" ;
-    while (key == "0") {
+    string key = "0";
+    while (InputCheck(key)==0) {
         cin >> key;
-        if(key=="0")
-        cout<<"Zero is wrong time for you\n";
-    }
-    levelTime = InputCheck(key);
 
+
+}
+levelTime = InputCheck(key);
     cout << "Начали \n Пиши слово : ";
 }
 
@@ -141,7 +139,7 @@ int TimerCheck(long int start)
 
 int SetTask()
 {
-    int fl = 0;
+
     time_t start = time(NULL);
     // cout << start << endl;
     string word = currentArray[start % 100];
@@ -180,7 +178,6 @@ void StartGame()
 
 
 
-
     while (1) {
         while (Points <= 400) {
             cout << "Выбор уровня 1 - 5";
@@ -200,13 +197,12 @@ void StartGame()
                 "99\n";
         cin >> key;
         InputCheck(key);
-        if(InputCheck(key)==99){
-            exit(1);
+        if(InputCheck(key)==99) {
+            cout << "GAME OVER\n";
         }
         Points = 0;
     }
-    cout << "GAME OVER\n";
-    exit(1);
+
 }
 
 #endif // KEYBOARD_NINJA_GAME_H
