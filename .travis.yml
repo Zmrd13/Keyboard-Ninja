@@ -35,3 +35,5 @@ script:
 - cd ..
 - cmake CMakeLists.txt 
 - make
+- cd tests
+- ./install.sh && ./Gtests.exe
