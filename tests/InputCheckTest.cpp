@@ -1,12 +1,15 @@
-#include "gtest/gtest.h"
 #include "../lib/InputCheck.h"
+#include "gtest/gtest.h"
 
-TEST(InputCheckTest,RightInput){
-ASSERT_EQ(InputCheck("1"),1);
+TEST(InputCheckTest, Input)
+{
+    ASSERT_EQ(InputCheck("1"), 1);
 }
-TEST(InputCheckTest,ExitInput){
-ASSERT_EQ(InputCheck("exit"),1337);
+TEST(InputCheckTest, An_Input)
+{
+    ASSERT_EQ(InputCheck("3"), 3);
 }
-TEST(InputCheckTest,WrongInput){
-ASSERT_EQ(InputCheck("wqr"),0);
+TEST(InputCheckTest, Wr_Input)
+{
+    ASSERT_EQ(InputCheck("e"), 0);
 }
