@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 #include "../lib/ArrProc.h"
 
 #include <fstream>
