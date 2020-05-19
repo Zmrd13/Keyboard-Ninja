@@ -8,6 +8,8 @@
 #include <ctime>
 #include <iostream>
 #include <string>
+#include "ArrProc.h"
+#include "InputCheck.h"
 
 using namespace std;
 
@@ -20,20 +22,7 @@ extern long int levelTime;
 extern string levelOne[100], levelTwo[100], levelThree[100], levelFour[100],
         levelFive[100]; //Массив уровней
 
-int InputCheck(string getLevelNumber)
-{
-    int Number = 0;
-    if (getLevelNumber == "exit") {
-        exit(1);
-    }
-    if (atoi(getLevelNumber.c_str()) == 0) {
 
-        return 0;
-    }
-    Number = atoi(getLevelNumber.c_str()); //
-
-    return Number;
-}
 
 void SelectLevel()
 {

@@ -13,4 +13,4 @@ add_executable(Keyboard_Ninja.exe
   lib/Game.h
   lib/GameMenu.h
   lib/LevelFileReader.cpp
-)
+        lib/InputCheck.h)
