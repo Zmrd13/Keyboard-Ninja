@@ -9,6 +9,8 @@ script:
 - cd googletest
 - cmake CmakeLists.txt
 - cd ..
+- cd tests
+- ./TEST.sh
 - g++ -Wall tests/main.cpp tests/LevelFileReaderTest.cpp lib/LevelFileReader.cpp tests/ArrProcTest.cpp -o Gtests.exe -lgtest
 - cmake CMakeLists.txt 
 - make
