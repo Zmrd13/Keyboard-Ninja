@@ -5,6 +5,10 @@ dist: xenial
 script:
 - git ls-files src/!*.txt | xargs clang-format -i && git diff --exit-code
 - echo "Compiling gtests ..."
+- git clone https://github.com/google/googletest.git
+- cd googletest
+- cmake CmakeLists.txt
+- cd ..
 - g++ -Wall tests/main.cpp tests/LevelFileReaderTest.cpp lib/LevelFileReader.cpp tests/ArrProcTest.cpp -o Gtests.exe -lgtest
 - cmake CMakeLists.txt 
 - make
