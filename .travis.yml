@@ -5,8 +5,8 @@ dist: xenial
 script:
 - git ls-files src/!*.txt | xargs clang-format -i && git diff --exit-code
 - cd tests
--./install.sh
--./Gtests.exe
+- ./install.sh
+- ./Gtests.exe
 - cd ..
 - cmake CMakeLists.txt 
 - make
