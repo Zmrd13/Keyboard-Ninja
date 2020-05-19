@@ -17,101 +17,115 @@ extern string currentArray[100];
 extern int Token;
 extern bool selectionLevel[5];
 extern long int levelTime;
-extern string levelOne[100], levelTwo[100], levelThree[100], levelFour[100], levelFive[100]; //Массив уровней
+extern string levelOne[100], levelTwo[100], levelThree[100], levelFour[100],
+        levelFive[100]; //Массив уровней
 
-int InputCheck()
+int InputCheck(const string& getLevelNumber)
 {
-    int in = 0;
-
-    while (!(cin >> in) || (cin.peek() != '\n')) {
-        cin.clear();
-
-        while (cin.get() != '\n')
-            ;
-
-        cout<<"Вы ввели не то ,что нужно .";
-            return 0;
-
+    int Number = 0;
+    if (getLevelNumber == "exit") {
+        return 1337;
+        exit(1);
     }
+    if (atoi(getLevelNumber.c_str()) ==0 ) {
+        cout << "Wrong input";
+        return 0;
+    }
+    Number = atoi(getLevelNumber.c_str()); //
 
-    return in;
+    return Number;
 }
 
 void SelectLevel()
 {
     cout << endl;
 
-    int key=0;
-    while(key==0){
-        key=InputCheck();
+    string key;
 
-    }
+    cin >> key;
 
-    Token = key;
+    Token = InputCheck(key);
 
-    switch (key) {
-        case 1:
-            ArrayWrite(levelOne);
-            break;
-        case 2:
-            ArrayWrite(levelTwo);
-            break;
-        case 3:
-            ArrayWrite(levelThree);
-            break;
-        case 4:
-            ArrayWrite(levelFour);
-            break;
-        case 5:
-            ArrayWrite(levelFive);
-            break;
-        default:
-            cout << "Уровни от 1 до 5 написано же было,еще раз введи\n";
-            SelectLevel();
-            break;
+
+    switch (InputCheck(key)) {
+    case 1:
+        ArrayWrite(levelOne);
+        break;
+    case 2:
+        ArrayWrite(levelTwo);
+        break;
+    case 3:
+        ArrayWrite(levelThree);
+        break;
+    case 4:
+        ArrayWrite(levelFour);
+        break;
+    case 5:
+        ArrayWrite(levelFive);
+        break;
+    default:
+        cout << "Уровни от 1 до 5 написано же было,еще раз введи\n";
+        SelectLevel();
+        break;
     }
 }
 
 void PrintGameMenu()
 {
-    cout <<
-            "╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗\n"
-            "║••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••║\n"
-            "║•••••••••••••••••••••••╔════════════════════════════════════════════════════════╗•••••••••••••••••••••••║\n"
-            "║•••••••••••••••••••••••║              Прогресс Прохождения Уровней              ║•••••••••••••••••••••••║\n"
-            "║•••••••••••••••••••••••╟────────────────────────────────────────────────────────╢•••••••••••••••••••••••║\n"
-            "║•••••••••••••••••••••••║              0 - не пройдено 1 - пройдено              ║•••••••••••••••••••••••║\n"
-            "║•••••••••••••••••••••••╚════════════════════════════════════════════════════════╝•••••••••••••••••••••••║\n"
-            "║••••••••••••╔═══════════════╤═══════════════╤═══════════════╤═══════════════╤═══════════════╗•••••••••••║\n"
-            "║••••••••••••║               │               │               │               │               ║•••••••••••║\n"
-            "║••••••••••••║ Уровень 1 - "<< selectionLevel[0] <<" │ Уровень 2 - "<< selectionLevel[1] <<" │ Уровень 3 - "<< selectionLevel[2] <<" │ Уровень 4 - "<< selectionLevel[3] <<" │ Уровень 5 - "<< selectionLevel[4] <<" ║•••••••••••║\n"
-            "║••••••••••••║               │               │               │               │               ║•••••••••••║\n"
-            "║••••••••••••╚═══════════════╧═══════════════╧═══════════════╧═══════════════╧═══════════════╝•••••••••••║\n"
-            "║••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••║\n"
-            "╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n";
+    cout << "╔═════════════════════════════════════════════════════════════════"
+            "═══════════════════════════════════════╗\n"
+            "║•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+            "•••••••••••••••••••••••••••••••••••••••║\n"
+            "║•••••••••••••••••••••••╔═════════════════════════════════════════"
+            "═══════════════╗•••••••••••••••••••••••║\n"
+            "║•••••••••••••••••••••••║              Прогресс Прохождения "
+            "Уровней              ║•••••••••••••••••••••••║\n"
+            "║•••••••••••••••••••••••╟─────────────────────────────────────────"
+            "───────────────╢•••••••••••••••••••••••║\n"
+            "║•••••••••••••••••••••••║              0 - не пройдено 1 - "
+            "пройдено              ║•••••••••••••••••••••••║\n"
+            "║•••••••••••••••••••••••╚═════════════════════════════════════════"
+            "═══════════════╝•••••••••••••••••••••••║\n"
+            "║••••••••••••╔═══════════════╤═══════════════╤═══════════════╤════"
+            "═══════════╤═══════════════╗•••••••••••║\n"
+            "║••••••••••••║               │               │               │    "
+            "           │               ║•••••••••••║\n"
+            "║••••••••••••║ Уровень 1 - "
+         << selectionLevel[0] << " │ Уровень 2 - " << selectionLevel[1]
+         << " │ Уровень 3 - " << selectionLevel[2] << " │ Уровень 4 - "
+         << selectionLevel[3] << " │ Уровень 5 - " << selectionLevel[4]
+         << " ║•••••••••••║\n"
+            "║••••••••••••║               │               │               │    "
+            "           │               ║•••••••••••║\n"
+            "║••••••••••••╚═══════════════╧═══════════════╧═══════════════╧════"
+            "═══════════╧═══════════════╝•••••••••••║\n"
+            "║•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+            "•••••••••••••••••••••••••••••••••••••••║\n"
+            "╚═════════════════════════════════════════════════════════════════"
+            "═══════════════════════════════════════╝\n";
 }
 
 void TimeChoose()
 {
     cout << "Выбери свое время в секундах\n";
-    int key=0;
-while(key==0){
- key=InputCheck();
-
-}
-    levelTime = key;
+    string key="0" ;
+    while (key == "0") {
+        cin >> key;
+        if(key=="0")
+        cout<<"Zero is wrong time for you\n";
+    }
+    levelTime = InputCheck(key);
 
     cout << "Начали \n Пиши слово : ";
 }
 
-int WriteCheck(const string& right,const string& input)
+int WriteCheck(const string& right, const string& input)
 {
-        if (input == right)
-        {
-            cout << "\nВерно" << endl;
-            return 0;
-        }
-        else return 1;
+    if (input == right) {
+        cout << "\nВерно" << endl;
+        return 0;
+    } else
+        return 1;
 }
 
 int TimerCheck(long int start)
@@ -126,28 +140,26 @@ int TimerCheck(long int start)
 }
 
 int SetTask()
-{int fl=0;
+{
+    int fl = 0;
     time_t start = time(NULL);
     // cout << start << endl;
     string word = currentArray[start % 100];
-string input;
+    string input;
     cout << "Пиши слово : " << word << endl;
-cin >>input;
-    if (WriteCheck(word,input) == 0) {
+    cin >> input;
+    if (WriteCheck(word, input) == 0) {
         TimerCheck(start);
         if (TimerCheck(start) > 0) {
             cout << "Молодец" << endl;
             Points += TimerCheck(start);
             cout << "Очков=" << Points << endl;
             return 0;
+        } else {
+            cout << "Не влез во время";
         }
-        else{
-            cout<<"Не влез во время";
-        }
-
-
     }
-    if(WriteCheck(word,input)==1) {
+    if (WriteCheck(word, input) == 1) {
         cout << "Не верно,ты опечатался\n";
         cout << "Ты проиграл" << endl;
         Flag = 0;
@@ -164,8 +176,12 @@ void StartGame()
     selectionLevel[2] = false;
     selectionLevel[3] = false;
     selectionLevel[4] = false;
-    int key = 'i';
-    while (key != 99) {
+    string key;
+
+
+
+
+    while (1) {
         while (Points <= 400) {
             cout << "Выбор уровня 1 - 5";
             SelectLevel();
@@ -176,13 +192,17 @@ void StartGame()
                 SetTask();
             }
         }
-        selectionLevel[Token-1] = true;
+        selectionLevel[Token - 1] = true;
 
         PrintGameMenu();
         cout << "Продолжишь или нет?Если да то введи любую кнопку ,если нет "
                 "введи "
                 "99\n";
-        key = InputCheck();
+        cin >> key;
+        InputCheck(key);
+        if(InputCheck(key)==99){
+            exit(1);
+        }
         Points = 0;
     }
     cout << "GAME OVER\n";
