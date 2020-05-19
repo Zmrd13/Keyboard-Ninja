@@ -10,7 +10,7 @@ script:
 - cmake CmakeLists.txt
 - cd ..
 - cd tests
-- ./TEST.sh
-- g++ -Wall tests/main.cpp tests/LevelFileReaderTest.cpp lib/LevelFileReader.cpp tests/ArrProcTest.cpp -o Gtests.exe -lgtest
+- g++ -Wall main.cpp LevelFileReaderTest.cpp ../lib/LevelFileReader.cpp ArrProcTest.cpp -o Gtests.exe -lgtest
+- cd ..
 - cmake CMakeLists.txt 
 - make
