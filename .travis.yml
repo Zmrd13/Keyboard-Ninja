@@ -1,9 +1,38 @@
-language: cpp
-compiler: gсс
-dist: xenial
+matrix:
+  include:
+    - os: linux
+      before_install: chmod -R +x ./ci/*platformio.sh
+      install: ./ci/install-platformio.sh
+      script: ./ci/build-platformio.sh
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      install: ./ci/install-linux.sh && ./ci/log-config.sh
+      script: ./ci/build-linux-bazel.sh
+    - os: linux
+      dist: xenial
+      compiler: clang
+      install: ./ci/install-linux.sh && ./ci/log-config.sh
+      script: ./ci/build-linux-bazel.sh
+    - os: linux
+      compiler: gcc
+      env: BUILD_TYPE=Debug VERBOSE=1 CXX_FLAGS="-std=c++11 -Wdeprecated"
+    - os: linux
+      compiler: clang
+      env: BUILD_TYPE=Release VERBOSE=1 CXX_FLAGS="-std=c++11 -Wdeprecated" NO_EXCEPTION=ON NO_RTTI=ON COMPILER_IS_GNUCXX=ON
+    - os: osx
+      compiler: gcc
+      env: BUILD_TYPE=Release VERBOSE=1 CXX_FLAGS="-std=c++11 -Wdeprecated" HOMEBREW_LOGS=~/homebrew-logs HOMEBREW_TEMP=~/homebrew-temp
+    - os: osx
+      compiler: clang
+      env: BUILD_TYPE=Release VERBOSE=1 CXX_FLAGS="-std=c++11 -Wdeprecated" HOMEBREW_LOGS=~/homebrew-logs HOMEBREW_TEMP=~/homebrew-temp
 
 script:
 - git ls-files src/!*.txt | xargs clang-format -i && git diff --exit-code
+- cd tests
+- ./install.sh
+- ./Gtests.exe
+- cd ..
 - cmake CMakeLists.txt 
 - make
 - cd tests
