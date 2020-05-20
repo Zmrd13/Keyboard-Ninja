@@ -1,0 +1,8 @@
+version: 1.0.{build}
+
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - appveyor-test
