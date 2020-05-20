@@ -1,6 +1,9 @@
 # Keyboard-Ninja
-### В терминале выполните команду  ./install.sh
+### В терминале выполните команду  ./install.sh 
+Linux:
 [![Build Status](https://travis-ci.org/Zmrd13/Keyboard-Ninja.svg?branch=master)](https://travis-ci.org/Zmrd13/Keyboard-Ninja)
+
+Windows:
 [![Build status](https://ci.appveyor.com/api/projects/status/v1h0wij51tgbisic?svg=true)](https://ci.appveyor.com/project/Zmrd13/keyboard-ninja)
 ###          
     ╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗\
